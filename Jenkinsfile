@@ -1,14 +1,19 @@
 pipeline {
     agent any
     stages {
-        stage ('Deploy to App Server') {
+        stage ('Building the application') {
             steps {
-                sh 'ssh rahul@192.168.1.5 "ls"'
-                sh 'ssh rahul@192.168.1.5 "rm -rf dvna && mkdir dvna"'
-                sh 'scp -r * rahul@192.168.1.5:~/dvna'
-                sh 'ssh rahul@192.168.1.5 "source ./env.sh"'
-                sh 'ssh rahul@192.168.1.5 "npm install"'
-                sh 'ssh rahul@192.168.1.5 "npm start"'
+                sh 'ls'
+            }
+        }
+
+        stage ('Deploying the application') {
+            steps {
+                sh 'ssh common@192.168.1.7 "ls"'
+                sh 'ssh common@192.168.1.7 "rm -rf dvna && mkdir dvna"'
+                sh 'scp -r * common@192.168.1.7:~/dvna'
+                sh 'ssh common@192.168.1.7 "source ./env.sh"'
+                sh 'ssh common@192.168.1.7 "npm start"'
             }
         }
     }
