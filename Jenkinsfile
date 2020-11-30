@@ -19,7 +19,7 @@ pipeline {
             steps {
                 sh 'ssh common@192.168.1.7 "export MYSQL_USER=${MYSQL_USER} MYSQL_DATABASE=${MYSQL_DATABASE}"'
                 sh 'ssh common@192.168.1.7 "rm -rf dvna && mkdir dvna"'
-                sh 'ssh common@192.168.1.7 "pm2 stop all'
+                sh 'ssh common@192.168.1.7 "pm2 stop all"'
                 sh 'scp -r * common@192.168.1.7:~/dvna'
                 sh 'ssh common@192.168.1.7 "cd dvna && pm2 start server.js"'
             }
