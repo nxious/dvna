@@ -21,7 +21,7 @@ pipeline {
                     ssh common@192.168.1.7 "cd dvna && pm2 stop server.js"
                     ssh common@192.168.1.7 "rm -rf dvna && mkdir dvna"
                     scp -r * common@192.168.1.7:~/dvna
-                    ssh common@192.168.1.7 "cd dvna && pm2 start ecosystem.config.js'"
+                    ssh common@192.168.1.7 "cd dvna && pm2 start ecosystem.config.js"
                 '''
             }
         }
