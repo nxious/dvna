@@ -9,11 +9,11 @@ pipeline {
 
         stage ('Deploying the application') {
             environment{
-                MYSQL_USER = 'root'
-                MYSQL_DATABASE = 'dvna'
-                MYSQL_PASSWORD = 'passw0rd'
-                MYSQL_HOST = '127.0.0.1'
-                MYSQL_PORT = '3306'
+                MYSQL_USER = credentials('MYSQL_USER')
+                MYSQL_DATABASE = credentials('MYSQL_DATABASE')
+                MYSQL_PASSWORD = credentials('MYSQL_PASSWORD')
+                MYSQL_HOST = credentials('MYSQL_HOST')
+                MYSQL_PORT = credentials('MYSQL_PORT')
             }
 
             steps {
