@@ -7,12 +7,26 @@ pipeline {
             }
         }
 
-        stage ('Performing NPM Audit') {
+        stage ('Performing NPM audit') {
             steps {
                 sh '''
                     npm i --package-lock-only
-                    npm audit
+                    npm audit || true
                 '''
+            }
+        }
+
+        stage ('Performing retire.js analysis') {
+            steps {
+                sh '''
+                    retire || true
+                '''
+            }
+        }
+
+        stage ('Performing Dependency-check') {
+            steps {
+                
             }
         }
 
