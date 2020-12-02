@@ -25,9 +25,6 @@ pipeline {
         }
 
         stage ('Performing Dependency-check') {
-            steps {
-                
-            }
         }
 
         stage ('Deploying the application') {
