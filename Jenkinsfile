@@ -10,7 +10,6 @@ pipeline {
         stage ('Performing NPM audit') {
             steps {
                 sh '''
-                    npm i --package-lock-only
                     npm audit --json > ~/reports/npm-audit.json
                 '''
             }
