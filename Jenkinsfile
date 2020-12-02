@@ -7,6 +7,14 @@ pipeline {
             }
         }
 
+        stage ('Performing NPM Audit') {
+            steps {
+                sh '''
+                    ls
+                '''
+            }
+        }
+
         stage ('Deploying the application') {
             environment{
                 MYSQL_USER = credentials('MYSQL_USER')
