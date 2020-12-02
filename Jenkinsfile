@@ -10,7 +10,7 @@ pipeline {
         stage ('Performing NPM audit') {
             steps {
                 sh '''
-                    npm audit --json > ~/reports/npm-audit.json 2>&1
+                    npm audit --json &> ~/reports/npm-audit.json 2>&1
                 '''
             }
         }
