@@ -16,17 +16,6 @@ pipeline {
             }
         }
 
-        stage ('Performing retire.js analysis') {
-            steps {
-                sh '''
-                    retire
-                '''
-            }
-        }
-
-        stage ('Performing Dependency-check') {
-        }
-
         stage ('Deploying the application') {
             environment{
                 MYSQL_USER = credentials('MYSQL_USER')
