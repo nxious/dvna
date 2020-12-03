@@ -23,6 +23,12 @@ pipeline {
             }
         }
 
+        stage ('Performing Dependency Check') {
+            steps {
+                dependencyCheckAnalyzer
+            }
+        }
+
         stage ('Deploying the application') {
             environment{
                 MYSQL_USER = credentials('MYSQL_USER')
