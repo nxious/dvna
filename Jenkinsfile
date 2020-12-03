@@ -15,6 +15,14 @@ pipeline {
             }
         }
 
+        stage ('Performing retire.js audit') {
+            steps {
+                sh '''
+                    retire --outputformat json  --outputpath ~/reports/retire.json
+                '''
+            }
+        }
+
         stage ('Deploying the application') {
             environment{
                 MYSQL_USER = credentials('MYSQL_USER')
