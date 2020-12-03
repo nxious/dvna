@@ -25,21 +25,7 @@ pipeline {
 
         stage ('Performing OWASP Dependency Check') {
             steps {
-                dependencyCheck ( 
-                    datadir: '~/scripts/dependency-check/', 
-                    isAutoupdateDisabled: true, 
-                    includeVulnReports: true, 
-                    hintsFile: '', 
-                    includeCsvReports: false, 
-                    includeHtmlReports: true, 
-                    includeJsonReports: false, 
-                    outdir: "~/reports/", 
-                    scanpath: "${WORKSPACE}", 
-                    skipOnScmChange: false, 
-                    skipOnUpstreamChange: false, 
-                    suppressionFile: '', 
-                    zipExtensions: ''
-                ) 
+                dependencyCheck 
           
                 dependencyCheckPublisher ( 
                     pattern: "~/reports/dependency-check-report.xml"
