@@ -26,6 +26,7 @@ pipeline {
         stage ('Performing OWASP Dependency Check') {
             steps {
                 dependencyCheck additionalArguments: '--format JSON', odcInstallation: 'DVNA'
+                sh 'mv dependency-check-report.json ~/reports/'
             }
         }
 
