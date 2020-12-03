@@ -25,7 +25,7 @@ pipeline {
 
         stage ('Performing OWASP Dependency Check') {
             steps {
-                dependencyCheck additionalArguments: '--format JSON --out "~/reports/"', odcInstallation: 'DVNA'
+                dependencyCheck additionalArguments: '--format JSON --out /home/jenkins/reports/', odcInstallation: 'DVNA'
             }
         }
 
