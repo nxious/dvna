@@ -25,11 +25,7 @@ pipeline {
 
         stage ('Performing OWASP Dependency Check') {
             steps {
-                dependencyCheck 
-          
-                dependencyCheckPublisher ( 
-                    pattern: "~/reports/dependency-check-report.xml"
-                )
+                dependencyCheck additionalArguments: '--format JSON', odcInstallation: 'DVNA'
             }
         }
 
