@@ -25,7 +25,9 @@ pipeline {
 
         stage ('Performind audit.js check') {
             withCredentials([string(credentialsId: 'OSSI_API_KEY', variable: 'OSSI_API_KEY'), string(credentialsId: 'OSSI_USERNAME', variable: 'OSSI_USERNAME')]) {
-                sh 'bash ~/scripts/auditjs.sh'
+                steps{
+                    sh 'bash ~/scripts/auditjs.sh'
+                }  
             }
                 
         }
