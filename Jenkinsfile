@@ -24,21 +24,24 @@ pipeline {
         }
 
         stage ('Performind audit.js check') {
-            environment{
-                OSSI_API_KEY = credentials('OSSI_API_KEY')
-                OSSI_USERNAME = credentials('OSSI_USERNAME')
+            withCredentials([string(credentialsId: 'OSSI_API_KEY', variable: 'OSSI_API_KEY'), string(credentialsId: 'OSSI_USERNAME', variable: 'OSSI_USERNAME')]) {
+                sh 'bash ~/scripts/auditjs.sh'
             }
-            steps{
-                sh '''
-                    auditjs ossi -u ${OSSI_USERNAME} -p ${OSSI_API_KEY} --json > ~/reports/auditjs-report.json 
-                '''
-            }
+                
         }
 
         stage ('Performing OWASP Dependency Check') {
             steps {
                 dependencyCheck additionalArguments: '--format JSON dependency-check-report.json', odcInstallation: 'DVNA'
                 sh 'mv dependency-check-report.json ~/reports/'                
+            }
+        }
+
+        stage ('Performing nodejsscan') {
+            steps {
+                sh '''
+                    nodejsscan 
+                '''
             }
         }
 
