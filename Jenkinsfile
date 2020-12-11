@@ -38,7 +38,7 @@ pipeline {
 
         stage ('Performing njsscan check') {
             steps {
-                sh 'njsscan -o ~/reports/nodejsscan-report.json --json  ~/workspace/DVNA/'
+                sh 'nodejsscan --output ~/reports/nodejsscan-report `pwd`'
             }
         }
 
