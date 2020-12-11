@@ -36,6 +36,12 @@ pipeline {
             }
         }
 
+        stage ('Performing njsscan check') {
+            steps {
+                sh 'njsscan -o ~/reports/nodejsscan-report.json --json  ~/workspace/DVNA/'
+            }
+        }
+
         stage ('Deploying the application') {
             environment{
                 MYSQL_USER = credentials('MYSQL_USER')
