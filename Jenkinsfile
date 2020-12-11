@@ -38,7 +38,7 @@ pipeline {
 
         stage ('Performing njsscan check') {
             steps {
-                sh 'nodejsscan --output ~/reports/nodejsscan-report `pwd`'
+                sh 'bash ~/scripts/njsscan.sh'
             }
         }
 
