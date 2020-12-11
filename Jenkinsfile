@@ -42,6 +42,12 @@ pipeline {
             }
         }
 
+        stage ('Performing insider check') {
+            steps {
+                sh 'bash ~/scripts/insider.sh'
+            }
+        }
+
         stage ('Deploying the application') {
             environment{
                 MYSQL_USER = credentials('MYSQL_USER')
