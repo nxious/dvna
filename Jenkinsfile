@@ -48,6 +48,14 @@ pipeline {
             }
         }
 
+        stage ('Performind snyk.io analysis') {
+            steps{
+                withCredentials([string(credentialsId: 'SNYK_API_KEY', variable: 'SNYK_API_KEY')]) {
+                    sh 'bash ~/scripts/snyk.sh'
+                }  
+            }
+        }
+
         stage ('Deploying the application') {
             environment{
                 MYSQL_USER = credentials('MYSQL_USER')
