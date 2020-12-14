@@ -59,7 +59,7 @@ pipeline {
         stage ('Performing SonarQube analysis') {
             steps{
                 withSonarQubeEnv(installationName: 'SonarQube', credentialsId: 'SONARQUBE_TOKEN') {
-                    sh '~/scripts/sonarqube/bin/sonar-scanner'
+                    sh 'sonar-scanner'
                 }
             }
         }
