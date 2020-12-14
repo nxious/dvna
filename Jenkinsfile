@@ -56,6 +56,12 @@ pipeline {
             }
         }
 
+        stage ('Performing SonarQube analysis') {
+            withSonarQubeEnv(credentialsId: 'SONARQUBE_TOKEN') {
+                sh '~/scripts/sonarqube/bin/sonar-scanner'
+            }
+        }
+
         stage ('Deploying the application') {
             environment{
                 MYSQL_USER = credentials('MYSQL_USER')
