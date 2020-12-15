@@ -56,10 +56,14 @@ pipeline {
             }
         }
 
-        stage ('Performing SonarQube analysis') {
-            steps{
-                withCredentials([string(credentialsId: 'SONARQUBE_TOKEN', variable: 'SONARQUBE_TOKEN')]) {
-                    sh 'bash ~/scripts/sonarqube.sh'
+        stage ('SonarQube Analysis') {
+            environment {
+                scannerHome = tool 'SonarQube Scanner'
+            }
+
+            steps {
+                withSonarQubeEnv ('SonarQube') {
+                    sh '${scannerHome}/bin/sonar-scanner'
                 }
             }
         }
