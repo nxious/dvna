@@ -15,13 +15,13 @@ pipeline {
             }
         }
 
-        stage ('Performing retire.js audit') {
+        stage ('Performing retire.js analysis') {
             steps {
                 sh 'bash ~/scripts/retirejs.sh'
             }
         }
 
-        stage ('Performind audit.js check') {
+        stage ('Performind audit.js analysis') {
             steps{
                 withCredentials([string(credentialsId: 'OSSI_API_KEY', variable: 'OSSI_API_KEY'), string(credentialsId: 'OSSI_USERNAME', variable: 'OSSI_USERNAME')]) {
                     sh 'bash ~/scripts/auditjs.sh'
@@ -36,19 +36,19 @@ pipeline {
             }
         }
 
-        stage ('Performing njsscan check') {
+        stage ('Performing njsscan analysis') {
             steps {
                 sh 'bash ~/scripts/njsscan.sh'
             }
         }
 
-        stage ('Performing insider check') {
+        stage ('Performing insider analysis') {
             steps {
                 sh 'bash ~/scripts/insider.sh'
             }
         }
 
-        stage ('Performind snyk.io analysis') {
+        stage ('Performing snyk.io analysis') {
             steps{
                 withCredentials([string(credentialsId: 'SNYK_API_KEY', variable: 'SNYK_API_KEY')]) {
                     sh 'bash ~/scripts/snyk.sh'
@@ -56,9 +56,9 @@ pipeline {
             }
         }
 
-        stage ('SonarQube Analysis') {
+        stage ('Performing SonarQube analysis') {
             environment {
-                scannerHome = tool 'SonarQube Scanner'
+                scannerHome = tool 'SonarQubeScanner'
             }
 
             steps {
