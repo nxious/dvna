@@ -63,7 +63,7 @@ pipeline {
 
             steps {
                 withSonarQubeEnv ('SonarQube') {
-                    sh '${scannerHome}/bin/sonar-scanner -Dsonar.projectKey="DVNA" -Dsonar.projectBaseDir="/var/lib/jenkins/workspace/DVNA" -Dsonar.report.export.path="/var/lib/jenkins/reports/sonar-report.json"'
+                    sh '${scannerHome}/bin/sonar-scanner -Dsonar.projectKey="DVNA" -Dsonar.projectBaseDir="/var/lib/jenkins/workspace/DVNA"'
                 }
             }
         }
