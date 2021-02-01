@@ -100,12 +100,12 @@ pipeline {
             }
         }
         */
-    }
-
-    stage('Archive artifacts : Reports') {
-        steps {
-            dir('/var/lib/jenkins/reports/') {
-                archiveArtifacts artifacts: '*.json', fingerprint: true
+        
+        stage('Archive artifacts : Reports') {
+            steps {
+                dir('/var/lib/jenkins/reports/') {
+                    archiveArtifacts artifacts: '*.json', fingerprint: true
+                }
             }
         }
     }
