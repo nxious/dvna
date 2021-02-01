@@ -4,6 +4,7 @@ pipeline {
         stage ('Building the application') {
             steps {
                 sh 'npm install'
+                sh 'cyclonedx-bom -o ~/reports/sbom.json'
             }
         }
 
