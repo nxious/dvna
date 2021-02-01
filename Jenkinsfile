@@ -86,5 +86,9 @@ pipeline {
                 '''
             }
         }
+
+        stage ('DAST Using OWASP ZAP') {
+            build job: 'DVNA_DAST', propagate: true, wait: true
+        }
     }
 }
