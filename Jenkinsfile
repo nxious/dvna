@@ -68,6 +68,12 @@ pipeline {
             }
         }
 
+        stage ('Generating SBoM') {
+            steps {
+                sh 'cyclonedx-bom -o ~/reports/sbom.json'
+            }
+        }
+
         stage ('Deploying the application') {
             environment{
                 MYSQL_USER = credentials('MYSQL_USER')
@@ -90,12 +96,6 @@ pipeline {
         stage ('DAST Using OWASP ZAP') {
             steps {
                 build job: 'DVNA_DAST', propagate: true, wait: true
-            }
-        }
-
-        stage ('Generating SBoM') {
-            steps {
-                sh 'cyclonedx-bom -o ~/reports/sbom.json'
             }
         }
     }
