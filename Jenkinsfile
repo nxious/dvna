@@ -102,7 +102,7 @@ pipeline {
 
     post {
         always {
-            archiveArtifacts artifacts: 'reports/*', fingerprint: true
+            archiveArtifacts artifacts: '~/reports/*.json', fingerprint: true
         }
     }
 }
