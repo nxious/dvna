@@ -7,12 +7,6 @@ pipeline {
             }
         }
 
-        stage ('Generatiing SBoM') {
-            steps {
-                sh 'cyclonedx-bom -o ~/reports/sbom.json'
-            }
-        }
-
         stage ('Performing NPM audit') {
             steps {
                 sh '''
@@ -96,6 +90,12 @@ pipeline {
         stage ('DAST Using OWASP ZAP') {
             steps {
                 build job: 'DVNA_DAST', propagate: true, wait: true
+            }
+        }
+
+        stage ('Generating SBoM') {
+            steps {
+                sh 'cyclonedx-bom -o ~/reports/sbom.json'
             }
         }
     }
