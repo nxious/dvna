@@ -99,4 +99,10 @@ pipeline {
             }
         }
     }
+
+    post {
+        always {
+            archiveArtifacts artifacts: 'reports/*', fingerprint: true
+        }
+    }
 }
