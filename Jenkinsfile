@@ -103,12 +103,8 @@ pipeline {
     }
 
     post {
-        environment{ 
-            JENKINS_HOME = '/var/lib/jenkins/'
-        }
-
         always {
-            archiveArtifacts artifacts: '${JENKINS_HOME}/reports/*.json', fingerprint: true
+            archiveArtifacts artifacts: '/var/lib/jenkins/reports/*.json', fingerprint: true
         }
     }
 }
