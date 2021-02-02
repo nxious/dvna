@@ -93,13 +93,11 @@ pipeline {
             }
         }
 
-        /*
         stage ('DAST Using OWASP ZAP') {
             steps {
                 build job: 'DVNA_DAST', propagate: true, wait: true
             }
         }
-        */
     }
 
     post {
