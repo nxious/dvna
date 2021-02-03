@@ -68,6 +68,12 @@ pipeline {
             }
         }
 
+        stage ('Linting code with ESLint') {
+            steps {
+                sh 'bash ~/scripts/eslint.sh'
+            }
+        }
+
         stage ('Generating SBoM') {
             steps {
                 sh 'cyclonedx-bom -o ~/reports/sbom.json'
