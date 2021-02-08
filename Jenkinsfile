@@ -87,14 +87,16 @@ pipeline {
                 MYSQL_PASSWORD = credentials('MYSQL_PASSWORD')
                 MYSQL_HOST = credentials('MYSQL_HOST')
                 MYSQL_PORT = credentials('MYSQL_PORT')
+                APPLICATION_SERVER_IP = credentials('APPLICATION_SERVER_IP')
+                APPLICATION_SERVER_USERNAME = credentials('APPLICATION_SERVER_USERNAME')
             }
 
             steps {
                 sh '''
-                    ssh common@192.168.1.4 "cd dvna && pm2 resurrect && pm2 stop DVNA && pm2 delete DVNA"
-                    ssh common@192.168.1.4 "rm -rf dvna && mkdir dvna"
-                    scp -r * common@192.168.1.4:~/dvna
-                    ssh -T common@192.168.1.4 "cd dvna && MYSQL_USER=${MYSQL_USER} MYSQL_DATABASE=${MYSQL_DATABASE} MYSQL_PASSWORD=${MYSQL_PASSWORD} MYSQL_HOST=${MYSQL_HOST} MYSQL_PORT=${MYSQL_PORT} pm2 start --name=DVNA npm -- start && pm2 save"
+                    ssh ${APPLICATION_SERVER_USERNAME}@${APPLICATION_SERVER_IP} "cd dvna && pm2 resurrect && pm2 stop DVNA && pm2 delete DVNA"
+                    ssh ${APPLICATION_SERVER_USERNAME}@${APPLICATION_SERVER_IP} "rm -rf dvna && mkdir dvna"
+                    scp -r * ${APPLICATION_SERVER_USERNAME}@${APPLICATION_SERVER_IP}:~/dvna
+                    ssh -T ${APPLICATION_SERVER_USERNAME}@${APPLICATION_SERVER_IP} "cd dvna && MYSQL_USER=${MYSQL_USER} MYSQL_DATABASE=${MYSQL_DATABASE} MYSQL_PASSWORD=${MYSQL_PASSWORD} MYSQL_HOST=${MYSQL_HOST} MYSQL_PORT=${MYSQL_PORT} pm2 start --name=DVNA npm -- start && pm2 save"
                 '''
             }
         }
