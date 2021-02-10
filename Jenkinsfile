@@ -31,7 +31,7 @@ pipeline {
 
         stage ('Performing OWASP Dependency Check') {
             steps {
-                dependencyCheck additionalArguments: '--format JSON dependency-check-report.json --disableYarnAudit', odcInstallation: 'DVNA'
+                dependencyCheck additionalArguments: '--format JSON dependency-check-report.json', odcInstallation: 'DVNA'
                 sh 'mv dependency-check-report.json ~/reports/'                
             }
         }
