@@ -81,6 +81,7 @@ pipeline {
         }
 
         stage ('Deploying the application') {
+            /*
             environment{
                 MYSQL_USER = credentials('MYSQL_USER')
                 MYSQL_DATABASE = credentials('MYSQL_DATABASE')
@@ -90,13 +91,20 @@ pipeline {
                 APPLICATION_SERVER_IP = credentials('APPLICATION_SERVER_IP')
                 APPLICATION_SERVER_USERNAME = credentials('APPLICATION_SERVER_USERNAME')
             }
-
+            
             steps {
                 sh '''
                     ssh ${APPLICATION_SERVER_USERNAME}@${APPLICATION_SERVER_IP} "cd dvna && pm2 resurrect && pm2 stop DVNA && pm2 delete DVNA"
                     ssh ${APPLICATION_SERVER_USERNAME}@${APPLICATION_SERVER_IP} "rm -rf dvna && mkdir dvna"
                     scp -r * ${APPLICATION_SERVER_USERNAME}@${APPLICATION_SERVER_IP}:~/dvna
                     ssh -T ${APPLICATION_SERVER_USERNAME}@${APPLICATION_SERVER_IP} "cd dvna && MYSQL_USER=${MYSQL_USER} MYSQL_DATABASE=${MYSQL_DATABASE} MYSQL_PASSWORD=${MYSQL_PASSWORD} MYSQL_HOST=${MYSQL_HOST} MYSQL_PORT=${MYSQL_PORT} pm2 start --name=DVNA npm -- start && pm2 save"
+                '''
+            }
+            */
+            steps{
+                sh '''
+                    bash ~/scripts/deploy_dvna_ecs.sh 
+                    rm -rf ./*
                 '''
             }
         }
